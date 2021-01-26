@@ -30,16 +30,16 @@ function myFunction() {
 console.log(x.split("/").length)
   if(x.split("/").length == 2){
     if(matriculaCampus(x.split("/").join('').split("-").join(''))){return {"valido":true, "tipo":"matricula do Campus digital", "limpo":x.split("/").join('').split("-").join('')}}
-  }
+  } 
 return {"valido":false, "tipo":"sei lá"}
 
 
 
-  
+
   
    function matriculaCampus(x){
        console.log(x)
-   return x.substr(0, 1) == "0" & x.length == 7 || x.length == 5;
+   return x.substr(0, 1) == "0" & x.length == 7 || x.length == 5 | x.length == 6;
   }
   function matriculaSigaa(x){
    return x.substr(0, 2) == "20" & x.length == 10;

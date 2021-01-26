@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Can Validate Input</h2>
+
+
+<input id="numb">
+
+<button type="button" onclick="myFunction()">Submit</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+      x = document.getElementById("numb").value;
+
+      document.getElementById("demo").innerHTML = JSON.stringify(Validate(x));
+
+    function Validate(x){
+  var x, text;
+
+  if (TestaCPF(x)){return {"valido":true, "tipo":"cpf sem pontuação"} }
+  if(x.split(".").length == 3){
+    if(TestaCPF(x.split(".").join('').split("-").join(''))){return {"valido":true, "tipo":"cpf com pontuação","limpo":x.split(".").join('').split("-").join('')}}
+  }
+
+  if(matriculaSigaa(x)){return {"valido":true, "tipo":"matricula do sigaa"} }
+  if(matriculaCampus(x)){return {"valido":true, "tipo":"matricula do Campus digital"} }
+console.log(x.split("/").length)
+  if(x.split("/").length == 2){
+    if(matriculaCampus(x.split("/").join('').split("-").join(''))){return {"valido":true, "tipo":"matricula do Campus digital", "limpo":x.split("/").join('').split("-").join('')}}
+  }
+return {"valido":false, "tipo":"sei lá"}
+
+
+
+  
+  
+   function matriculaCampus(x){
+       console.log(x)
+   return x.substr(0, 1) == "0" & x.length == 7 || x.length == 5;
+  }
+  function matriculaSigaa(x){
+   return x.substr(0, 2) == "20" & x.length == 10;
+  }
+  function TestaCPF(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+  if (strCPF == "00000000000") return false;
+
+  for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+  Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+    return true;
+}
+    }
+}
+</script>
+
+</body>
+</html> 
